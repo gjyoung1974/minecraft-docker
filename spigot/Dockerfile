@@ -32,6 +32,7 @@ RUN mv /spigot-*.jar /home/spigot/Spigot_Server/spigot.jar
 
 # Clean up from the build of spigot.jar
 RUN rm -r -f /BuildData && rm -r -f Spigot && rm BuildTools.log.txt && rm -r -f apache-maven-3.6.0
+RUN apt-get --purge -y remove curl git && apt-get -y autoremove
 
 # Take ownership of assets
 RUN chown -R spigot:spigot /home/spigot/Spigot_Server && chown -R spigot:spigot /logs
