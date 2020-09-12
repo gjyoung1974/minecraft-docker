@@ -27,6 +27,9 @@ RUN curl -L https://ci.md-5.net/job/BungeeCord/lastSuccessfulBuild/artifact/modu
 
 RUN chown -R bungee:bungee /home/bungee
 
+# Clean up
+RUN apt-get --purge -y remove curl && apt-get -y autoremove
+
 USER bungee
 WORKDIR "/home/bungee"
 

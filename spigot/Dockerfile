@@ -4,11 +4,11 @@ FROM debian:stable
 RUN apt-get -y update && apt-get upgrade
 RUN apt-get -y install git openjdk-11-jre-headless curl
 
-# Run spigotcord as spigot user
+# Run spigot as spigot user
 RUN useradd spigot && mkdir -p /home/spigot
 RUN usermod -a -G spigot spigot
 
-# Add spigotcord files
+# Add spigot files
 RUN mkdir -p /home/spigot/Spigot_Server && mkdir -p /logs
 
 # get spigot buildtools
