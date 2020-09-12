@@ -24,7 +24,7 @@ servers:
     restricted: false
 listeners:
 - query_port: 25577
-  motd: '&1Skyhub - Welcome to the sky.r'
+  motd: '&1Skyhub - Welcome to the sky.'
   tab_list: GLOBAL_PING
   query_enabled: false
   proxy_protocol: false

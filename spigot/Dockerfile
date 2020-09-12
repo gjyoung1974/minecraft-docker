@@ -28,7 +28,7 @@ RUN echo 'eula=true' > /home/spigot/Spigot_Server/eula.txt
 ADD *.json /home/spigot/Spigot_Server/
 ADD *.yml /home/spigot/Spigot_Server/
 ADD *.properties /home/spigot/Spigot_Server/
-RUN mv /spigot-*.jar /home/spigot/Spigot_Server/spigot.jar
+RUN mv /spigot-*.jar /spigot.jar
 
 # Clean up from the build of spigot.jar
 RUN rm -r -f /BuildData && rm -r -f Spigot && rm BuildTools.log.txt && rm -r -f apache-maven-3.6.0
@@ -39,8 +39,10 @@ RUN chown -R spigot:spigot /home/spigot/Spigot_Server && chown -R spigot:spigot 
 
 # Drop user permissions from root to spigot user
 USER spigot
+
+# TODO: decouple the config, plugins, world data, etc from the container
 WORKDIR "/home/spigot/Spigot_Server"
 
 EXPOSE 25565
 
-ENTRYPOINT [ "java", "-Xms2G", "-Xmx2G", "-XX:+UseG1GC", "-jar", "/home/spigot/Spigot_Server/spigot.jar", "nogui" ]
+ENTRYPOINT [ "java", "-Xms2G", "-Xmx2G", "-XX:+UseG1GC", "-jar", "/spigot.jar", "nogui" ]
