@@ -25,12 +25,6 @@ RUN curl -L http://www.multicraft.org/download/conf?file=spigot.jar.conf > /serv
 # rename spigot
 RUN mv /spigot-*.jar /spigot.jar
 
-# Clean up from the build of spigot.jar
-RUN rm -r -f ./world_nether && rm -r -f world_the_end && rm -r -f /BuildData && rm -r -f Spigot && rm BuildTools.log.txt && rm -r -f apache-maven-3.6.0 && rm /server/BuildTools.jar
-RUN apt-get --purge -y remove curl git && apt-get -y autoremove
-
-ENTRYPOINT [ "tail", "-f", "/dev/null" ]
-
 # App layer
 FROM debian:stable AS minecraft-server
 
@@ -42,7 +36,10 @@ RUN apt-get -y install git openjdk-11-jre-headless curl
 RUN useradd spigot && mkdir -p /home/spigot && mkdir -p /spigot/spigot
 RUN usermod -a -G spigot spigot
 
+# Add latest spigot jar
 COPY --from=builder /spigot.jar /server/server/spigot.jar
+
+# TODO add all of our fave plugins
 
 # Accept the Minecraft EULA
 RUN echo 'eula=true' > /server/server/eula.txt
